@@ -53,21 +53,20 @@ const util = new function () {
 
 const student = new function () {
 
-	this.submit = () => {
+    this.submit = () => {
 
-		const st = {
+        const st = {
             name: util.id("name").value,
-			birthday: util.id("birthday").value,
-			course: util.id("course").value,
+            birthday: util.id("birthday").value,
+            course: util.id("course").value,
             group: util.id("group").value,
             phone: util.id("phone").value,
         };
 
 
-        if(util.id("Id").value == "0"){
+        if (util.id("Id").value == "0") {
             data.create(st)
-        }
-        else {
+        } else {
             st.Id = util.id("Id").value;
             data.update(st);
         }
@@ -83,19 +82,19 @@ const student = new function () {
         util.id("fieldset_deletion").style.display = "none";
     }
 
-    const init = ()=>{
+    const init = () => {
         this.render();
 
-        util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el=>{
-            util.listen(el, "click", ()=>{
+        util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el => {
+            util.listen(el, "click", () => {
                 util.id("fieldset_deletion").style.display = "none";
             });
         });
 
-        util.q("#kr_to_close_fieldset_creation").forEach(el=>{
-            util.listen(el, "click", ()=>{
+        util.q("#kr_to_close_fieldset_creation").forEach(el => {
+            util.listen(el, "click", () => {
                 util.id("fieldset_creation").style.display = "none";
-             });
+            });
         });
 
         util.id("delete_student").addEventListener("click", student.remove)
@@ -114,7 +113,7 @@ const student = new function () {
         util.q("#form_creation")[0].reset();
 
         const st = data.get(el.dataset["id"]);
-        for(let k in st){
+        for (let k in st) {
             util.id(k).value = st[k];
         }
         util.id("fieldset_creation").style.display = "block";
@@ -131,27 +130,27 @@ const student = new function () {
         rm: []
     };
 
-    const clearListener = ()=>{
-        listeners.edit.forEach(el=>{
-            el.removeEventListener("click",edit);
+    const clearListener = () => {
+        listeners.edit.forEach(el => {
+            el.removeEventListener("click", edit);
         });
-        listeners.rm.forEach(el=>{
-            el.removeEventListener("click",rm);
+        listeners.rm.forEach(el => {
+            el.removeEventListener("click", rm);
         });
         listeners.edit = [];
         listeners.rm = [];
     };
 
-    const addListener = ()=>{
+    const addListener = () => {
         util.id("to_view_form_add").addEventListener("click", add);
 
-        util.q(".to_view_form_edit").forEach(el=>{
+        util.q(".to_view_form_edit").forEach(el => {
             listeners.edit.push(el);
-            util.listen(el, "click", ()=>edit(el));
+            util.listen(el, "click", () => edit(el));
         });
-        util.q(".to_view_form_remove").forEach(el=>{
+        util.q(".to_view_form_remove").forEach(el => {
             listeners.rm.push(el);
-            util.listen(el, "click", ()=>rm(el));
+            util.listen(el, "click", () => rm(el));
         });
     };
 
@@ -177,7 +176,7 @@ const student = new function () {
             </td>
         </tr>
     `;
-    window.addEventListener("load",init);
+    window.addEventListener("load", init);
 }
 
 

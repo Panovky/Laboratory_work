@@ -1,92 +1,93 @@
 body, html {
-	margin: auto;
-	padding: auto;
-	background-color: #edeef7;
-	font-size: 16pt;
-	font-family: times new roman;
+    margin: auto;
+    padding: auto;
+    background-color: #edeef7;
+    font-size: 16pt;
+    font-family: times new roman;
 }
 
-#table{
-	z-index: 1;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 16pt;
-	width: 90%;
-	background-color: white;
-	vertical-align: middle;	
-	border-collapse: collapse;
-	border: 2px solid black;
-	box-shadow: 7px 7px 7px rgb(102, 106, 0.6);
+#table {
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16pt;
+    width: 90%;
+    background-color: white;
+    vertical-align: middle;
+    border-collapse: collapse;
+    border: 2px solid black;
+    box-shadow: 7px 7px 7px rgb(102, 106, 0.6);
 }
 
 #table th, td {
-	border: 2px solid black;
-	padding: 10px;
+    border: 2px solid black;
+    padding: 10px;
 }
 
 .table_buttons td {
-	border: white;
+    border: white;
     text-align: center;
 }
+
 .table_buttons {
-	width: 100%;
+    width: 100%;
 }
 
 #fieldset_creation {
-	display: none;
-	position: absolute;
-	z-index: 2;
-	top:50%;
-    left:50%;
-	transform:translate(-50%, -50%);
-	background-color: white;
-	border: 2px solid black;
-	border-radius: 10px;
-	width: 500px;
-	box-shadow: 7px 7px 5px rgb(102, 106, 0.6);
+    display: none;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 500px;
+    box-shadow: 7px 7px 5px rgb(102, 106, 0.6);
 }
 
 #fieldset_deletion {
-	display: none;
-	position: absolute;
-	z-index: 3;
-	top:50%;
-    left:50%;
-	transform:translate(-50%, -50%);
-	text-align: center;
-	background-color: white;
-	border: 2px solid black;
-	border-radius: 10px;
-	width: 700px;
-	box-shadow: 7px 7px 7px rgb(102, 106, 0.6);
+    display: none;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 700px;
+    box-shadow: 7px 7px 7px rgb(102, 106, 0.6);
 }
 
 .input {
     margin-left: auto;
     margin-right: auto;
-	width: 80%;
+    width: 80%;
 }
 
 .modal-title {
-	position: flex;
-	text-align: center;
+    position: flex;
+    text-align: center;
 }
 
 #table td {
-	text-align: center;
+    text-align: center;
 }
 
 #Centr {
-	margin: 0 auto;
+    margin: 0 auto;
 }
 
 #ADD {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #kr_to_close_fieldset_deletion, #kr_to_close_fieldset_creation {
-	position: absolute;
+    position: absolute;
     top: 10px;
     right: 10px;
 }
