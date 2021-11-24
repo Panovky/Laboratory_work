@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<title>Список студентов ИЦС</title>
+		<link href="List.css" rel="stylesheet" />
+		<script src="List.js"></script>
+
+	</head>
+
+	<body>
+
+		
+		<fieldset id="fieldset_deletion">
+			<p>Вы действительно желаете удалить данного студента из списка?</p><br />
+			<table class="table_buttons">
+				<tr>
+					<td><button id="delete_student" type="button">Да</button></td>
+					<td><button id="to_close_fieldset_deletion" type="button">Нет</button></td>
+				</tr>
+			</table>
+			<button type="button" id="kr_to_close_fieldset_deletion">x</button>
+		</fieldset><br />
+	
+	
+		<fieldset id="fieldset_creation">
+		    <p class = "modal-title"></p><br />
+			<form method="post" enctype="multipart/form-data" id="form_creation">
+				<center>
+				<input id="Id" type="hidden" value = "0" />
+				<input id="name" type="text" placeholder="Ф.И.О." class="input"/><br /><br />
+				<input id="birthday" type="date" placeholder="Дата рождения" class="input"/><br /><br />
+				<input id="course" type="text" placeholder="Курс" class="input"/><br /><br />
+				<input id="group" type="text" placeholder="Группа" class="input"/><br /><br />
+				<input id="phone" type="text" placeholder="Телефон" class="input"/><br /><br />
+				</center>
+				<table class="table_buttons">
+					<tr>
+						<td><input type="reset" value="Очистить"/></td>
+						<td><button id="submit" type="button">Отправить</button></td>
+					</tr>
+				</table>
+				
+				<button type="button" id="kr_to_close_fieldset_creation">x</button>
+				
+			</form>
+		</fieldset><br />
+		
+		<table id="table">
+			
+			<thead>		
+				<tr>
+					<th>№</th>
+					<th>Ф.И.О.</th>
+					<th>Дата рождения</th>
+					<th>Курс</th>
+					<th>Группа</th>
+					<th>Телефон</th>
+					<th>Действия</th>
+				</tr>
+			</thead>
+			
+			<tbody  id="main_table">
+							
+			</tbody>
+				
+		</table><br />
+		
+	    <div id="ADD"><button id = "to_view_form_add" type="button">Добавить</button></div>
+
+	</body>
+</html>
