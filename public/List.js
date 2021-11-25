@@ -6,6 +6,7 @@ const data = (new function () {
     this.create = obj => {
         obj.Id = id_of_student++;
         array[obj.Id] = obj;
+        util.ajax(method: "POST", url:"/", data: JSON.stringify(obj)});
         return obj;
     }
 
