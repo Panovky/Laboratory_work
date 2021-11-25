@@ -2,6 +2,11 @@ const data = (new function () {
 
     let id_of_student = 1;
     const array = {};
+    const init = () => {
+        util.ajax({method: "GET",url:"/"}, data=> {
+            console.log(data);
+        });
+    }
 
     this.create = obj => {
         obj.Id = id_of_student++;
