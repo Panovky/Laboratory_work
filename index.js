@@ -39,6 +39,7 @@ const student = (req, res) => {
                 echo(res, {error: "не передан id"});
             break;
     }
+    echo(res, {error: "500"});
 };
 
 const getAsyncData = (req, callback)=>{
@@ -56,9 +57,6 @@ const handler = function (req, res) {
     switch(url[0]) {
         case "student":
             student(req,res);
-            return;
-        case "":
-            res.end("index");
             return;
     }
     staticFileDir.serve(req,res);
