@@ -9,6 +9,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node": "^17.1.0",
+    "static": "^2.0.0"
+  }
 }
-

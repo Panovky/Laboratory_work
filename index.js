@@ -1,6 +1,7 @@
 const http = require("http"),
     crud = require("./crud");
     static = require("node-static");
+const staticFileDir = new static.Server("./public");
 
 const echo = (res, content) => {
     res.end(JSON.stringify(content));
@@ -60,10 +61,7 @@ const handler = function (req, res) {
             res.end("index");
             return;
     }
-    console.log("AFTER SWITCH");
-    console.log(req.url);
-    console.log(req.method);
-    res.end("echo");
+    staticFileDir.serve(req,res);
 }
 
 http.createServer(handler).listen(8090, () => {
