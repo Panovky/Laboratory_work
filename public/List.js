@@ -1,6 +1,6 @@
 const data = (new function () {
 
-    let id_of_student = 1;
+    let inc = 1;
     const array = {};
     this.init = () => {
         util.ajax({method: "GET",url:"/student"}, data=> {
@@ -9,7 +9,7 @@ const data = (new function () {
     }
 
     this.create = obj => {
-        obj.Id = id_of_student++;
+        obj.Id = inc++;
         array[obj.Id] = obj;
         util.ajax({method: "POST", url:"/student", data: JSON.stringify(obj)});
         return obj;
@@ -34,13 +34,8 @@ const data = (new function () {
 
 const util = new function () {
 
-    this.ajax = (params) => {
-        let url = "";
-        if (params.path !== undefined) {
-            url = params.path;
-            delete params.path;
-        }
-        fetch("/student"+url, params).then(data => data.json().then())
+    this.ajax = (params, callback) => {
+        fetch(params).then(data => data.toJson()).then(callback);
     }
 
     this.parse = (tpl, obj) => {
@@ -80,25 +75,28 @@ const student = new function () {
         };
 
 
-        if (util.id("Id").value == "0") {
+        if (util.id("Id").value === "0") {
             data.create(st)
         } else {
             st.Id = util.id("Id").value;
             data.update(st);
         }
-
-        util.id("fieldset_creation").style.display = "none";
         this.render();
+        util.id("fieldset_creation").style.display = "none";
+
     }
 
     this.remove = () => {
         data.delete(activeStudent);
-        this.render();
         activeStudent = null;
+        this.render();
         util.id("fieldset_deletion").style.display = "none";
     }
 
+    window.addEventListener("load", init);
+
     const init = () => {
+        data.init()
         this.render();
 
         util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el => {
@@ -192,7 +190,6 @@ const student = new function () {
             </td>
         </tr>
     `;
-    window.addEventListener("load", init);
 }
 
 
