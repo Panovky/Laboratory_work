@@ -1,5 +1,6 @@
 const http = require("http"),
     crud = require("./crud");
+    static = require("node-static");
 
 const echo = (res, content) => {
     res.end(JSON.stringify(content));
