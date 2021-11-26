@@ -2,8 +2,8 @@ const data = (new function () {
 
     let id_of_student = 1;
     const array = {};
-    const init = () => {
-        util.ajax({method: "GET",url:"/"}, data=> {
+    this.init = () => {
+        util.ajax({method: "GET",url:"/student"}, data=> {
             console.log(data);
         });
     }
@@ -11,7 +11,7 @@ const data = (new function () {
     this.create = obj => {
         obj.Id = id_of_student++;
         array[obj.Id] = obj;
-        util.ajax(method: "POST", url:"/", data: JSON.stringify(obj)});
+        util.ajax({method: "POST", url:"/student", data: JSON.stringify(obj)});
         return obj;
     }
 
@@ -23,7 +23,7 @@ const data = (new function () {
 
     this.update = obj => {
         array[obj.Id] = obj;
-        util.ajax(method: "PUT", url:"/", data: JSON.stringify(obj)});
+        util.ajax({method: "PUT", url:"/student", data: JSON.stringify(obj)});
         return obj;
     }
 
@@ -32,18 +32,16 @@ const data = (new function () {
     }
 });
 
-for (let num = 1; num < 10; num++) {
-    data.create({
-        name: "Студент " + num
-        , birthday: "2002-10-2" + num
-        , course: "1"
-        , group: "ЭПИ-14"
-        , phone: "8(910)245-42-7" + num
-        ,
-    });
-}
-
 const util = new function () {
+
+    this.ajax = (params) => {
+        let url = "";
+        if (params.path !== undefined) {
+            url = params.path;
+            delete params.path;
+        }
+        fetch("/student"+url, params).then(data => data.json().then())
+    }
 
     this.parse = (tpl, obj) => {
         let str = tpl;
@@ -56,6 +54,17 @@ const util = new function () {
     this.id = el => document.getElementById(el);
     this.q = el => document.querySelectorAll(el);
     this.listen = (el, type, callback) => el.addEventListener(type, callback);
+}
+
+for (let num = 1; num < 10; num++) {
+    data.create({
+        name: "Студент " + num
+        , birthday: "2002-10-2" + num
+        , course: "1"
+        , group: "ЭПИ-14"
+        , phone: "8(910)245-42-7" + num
+        ,
+    });
 }
 
 const student = new function () {
