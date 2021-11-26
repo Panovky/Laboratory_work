@@ -1,5 +1,5 @@
 const http = require("http"),
-    crud = require("./crud");
+    crud = require("./crud"),
     static = require("node-static");
 const staticFileDir = new static.Server("./public");
 
