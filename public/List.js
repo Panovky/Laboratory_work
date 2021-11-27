@@ -1,5 +1,4 @@
 const data = (new function () {
-
     let inc = 1;
     const array = {};
     this.init = () => {
@@ -11,7 +10,7 @@ const data = (new function () {
     this.create = obj => {
         obj.Id = inc++;
         array[obj.Id] = obj;
-        util.ajax({method: "POST", url:"/student", data: JSON.stringify(obj)});
+        util.ajax({method: "POST",url:"/student",data: JSON.stringify(obj)});
         return obj;
     }
 
@@ -33,9 +32,8 @@ const data = (new function () {
 });
 
 const util = new function () {
-
     this.ajax = (params, callback) => {
-        fetch(params).then(data => data.toJson()).then(callback);
+        fetch(params).then(data => data.json()).then(callback);
     }
 
     this.parse = (tpl, obj) => {
@@ -92,8 +90,6 @@ const student = new function () {
         this.render();
         util.id("fieldset_deletion").style.display = "none";
     }
-
-    window.addEventListener("load", init);
 
     const init = () => {
         data.init()
@@ -190,6 +186,8 @@ const student = new function () {
             </td>
         </tr>
     `;
+
+    window.addEventListener("load", init);
 }
 
 
