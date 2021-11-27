@@ -7,6 +7,16 @@ const echo = (res, content) => {
     res.end(JSON.stringify(content));
 };
 
+for (let num = 1; num < 10; num++) {
+    crud.create({
+        name: "Студент " + num
+        , birthday: "2002-10-2" + num
+        , course: "1"
+        , group: "ЭПИ-14"
+        , phone: "8(910)245-42-7" + num
+        ,
+    });
+}
 
 const student = (req, res) => {
     res.writeHead(200, {"Content-type": "application/json"});
@@ -14,7 +24,7 @@ const student = (req, res) => {
     switch(req.method) {
 
         case "GET":
-            if(url.length > 1)
+            if (url.length > 1)
                 echo(res, crud.get(url[1]));
             else
                 echo(res, crud.getAll());
@@ -33,13 +43,14 @@ const student = (req, res) => {
             break;
 
         case "DELETE":
-            if(url.length > 1)
+            if (url.length > 1)
                 echo(res, crud.delete(url[1]));
             else
                 echo(res, {error: "не передан id"});
             break;
+        default:
+            echo(res, {error: "500"});
     }
-    echo(res, {error: "500"});
 };
 
 const getAsyncData = (req, callback)=>{
@@ -62,6 +73,6 @@ const handler = function (req, res) {
     staticFileDir.serve(req,res);
 }
 
-http.createServer(handler).listen(8090, () => {
+http.createServer(handler).listen(8092, () => {
     console.log("run");
 })

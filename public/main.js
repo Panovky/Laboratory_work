@@ -1,16 +1,19 @@
 const data = (new function () {
     let inc = 1;
     const array = {};
-    this.init = () => {
-        util.ajax({method: "GET",url:"/student"}, data=> {
-            console.log(data);
+    this.init = (callback) => {
+        util.ajax({method: "GET"}, data=> {
+            data.map(std => {
+                array[std.Id] = std;
+            });
+            if(typeof callback == 'function') callback();
         });
     }
 
     this.create = obj => {
         obj.Id = inc++;
         array[obj.Id] = obj;
-        util.ajax({method: "POST",url:"/student",data: JSON.stringify(obj)});
+        util.ajax( {method: "POST",body: JSON.stringify(obj)});
         return obj;
     }
 
@@ -22,7 +25,7 @@ const data = (new function () {
 
     this.update = obj => {
         array[obj.Id] = obj;
-        util.ajax({method: "PUT", url:"/student", data: JSON.stringify(obj)});
+        util.ajax({method: "PUT", body: JSON.stringify(obj)});
         return obj;
     }
 
@@ -33,7 +36,7 @@ const data = (new function () {
 
 const util = new function () {
     this.ajax = (params, callback) => {
-        fetch(params).then(data => data.json()).then(callback);
+        fetch("/student", params).then(data => data.json()).then(callback);
     }
 
     this.parse = (tpl, obj) => {
@@ -49,16 +52,6 @@ const util = new function () {
     this.listen = (el, type, callback) => el.addEventListener(type, callback);
 }
 
-for (let num = 1; num < 10; num++) {
-    data.create({
-        name: "Студент " + num
-        , birthday: "2002-10-2" + num
-        , course: "1"
-        , group: "ЭПИ-14"
-        , phone: "8(910)245-42-7" + num
-        ,
-    });
-}
 
 const student = new function () {
 
@@ -92,23 +85,24 @@ const student = new function () {
     }
 
     const init = () => {
-        data.init()
-        this.render();
+        data.init( () => {
+            this.render();
 
-        util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el => {
-            util.listen(el, "click", () => {
-                util.id("fieldset_deletion").style.display = "none";
+            util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el => {
+                util.listen(el, "click", () => {
+                    util.id("fieldset_deletion").style.display = "none";
+                });
             });
-        });
 
-        util.q("#kr_to_close_fieldset_creation").forEach(el => {
-            util.listen(el, "click", () => {
-                util.id("fieldset_creation").style.display = "none";
+            util.q("#kr_to_close_fieldset_creation").forEach(el => {
+                util.listen(el, "click", () => {
+                    util.id("fieldset_creation").style.display = "none";
+                });
             });
-        });
 
-        util.id("delete_student").addEventListener("click", student.remove)
-        util.id("submit").addEventListener("click", student.submit)
+            util.id("delete_student").addEventListener("click", student.remove)
+            util.id("submit").addEventListener("click", student.submit)
+        })
     };
 
     const add = () => {
