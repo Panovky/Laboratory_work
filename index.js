@@ -1,22 +1,22 @@
 const http = require("http"),
     crud = require("./crud"),
-    static = require("node-static");
-const staticFileDir = new static.Server("./public");
+    statics = require("node-static");
+const staticFileDir = new statics.Server("./public");
 
 const echo = (res, content) => {
     res.end(JSON.stringify(content));
 };
 
-for (let num = 1; num < 10; num++) {
-    crud.create({
-        name: "Студент " + num
-        , birthday: "2002-10-2" + num
-        , course: "1"
-        , group: "ЭПИ-14"
-        , phone: "8(910)245-42-7" + num
-        ,
-    });
-}
+// for (let num = 1; num < 10; num++) {
+//     crud.create({
+//         name: "Студент " + num
+//         , birthday: "2002-10-2" + num
+//         , course: "1"
+//         , group: "ЭПИ-14"
+//         , phone: "8(910)245-42-7" + num
+//         ,
+//     });
+// }
 
 const student = (req, res) => {
     res.writeHead(200, {"Content-type": "application/json"});
@@ -54,13 +54,9 @@ const student = (req, res) => {
 };
 
 const getAsyncData = (req, callback)=>{
-
     let data = "";
-    //связывание функции chunk c датой, т.е. пока данные поступают на сервер
-    req.on("data", chunk => {data += chunk;}); // в дату добавляются введенные строчки из json
-    //событие data генерируется, когда на сервер поступает данные
-    req.on("end", () => callback(data)); //когда все данные прибыли, мы вызываем дату
-    //end генерируется, когда все данные прибыли
+    req.on("data", chunk => {data += chunk;});
+    req.on("end", () => callback(data));
 };
 
 const handler = function (req, res) {

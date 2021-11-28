@@ -5,6 +5,7 @@ const data = (new function () {
         util.ajax({method: "GET"}, data=> {
             data.map(std => {
                 array[std.Id] = std;
+                inc = std.Id;
             });
             if(typeof callback == 'function') callback();
         });
@@ -31,12 +32,18 @@ const data = (new function () {
 
     this.delete = id => {
         delete array[id];
+        util.ajax({method: "DELETE", path: "/" + id});
     }
 });
 
 const util = new function () {
     this.ajax = (params, callback) => {
-        fetch("/student", params).then(data => data.json()).then(callback);
+        let url = "";
+        if (params.path != undefined) {
+            url = params.path;
+            delete params.path;
+        }
+        fetch("/student"+url, params).then(data => data.json()).then(callback);
     }
 
     this.parse = (tpl, obj) => {
@@ -66,7 +73,7 @@ const student = new function () {
         };
 
 
-        if (util.id("Id").value === "0") {
+        if (util.id("Id").value == "0") {
             data.create(st)
         } else {
             st.Id = util.id("Id").value;
@@ -87,22 +94,22 @@ const student = new function () {
     const init = () => {
         data.init( () => {
             this.render();
+        });
 
-            util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el => {
-                util.listen(el, "click", () => {
-                    util.id("fieldset_deletion").style.display = "none";
-                });
+        util.q("#to_close_fieldset_deletion, #kr_to_close_fieldset_deletion").forEach(el => {
+            util.listen(el, "click", () => {
+                util.id("fieldset_deletion").style.display = "none";
             });
+        });
 
-            util.q("#kr_to_close_fieldset_creation").forEach(el => {
-                util.listen(el, "click", () => {
-                    util.id("fieldset_creation").style.display = "none";
-                });
+        util.q("#kr_to_close_fieldset_creation").forEach(el => {
+            util.listen(el, "click", () => {
+                util.id("fieldset_creation").style.display = "none";
             });
+        });
 
-            util.id("delete_student").addEventListener("click", student.remove)
-            util.id("submit").addEventListener("click", student.submit)
-        })
+        util.id("delete_student").addEventListener("click", student.remove)
+        util.id("submit").addEventListener("click", student.submit)
     };
 
     const add = () => {
