@@ -2,19 +2,19 @@ const data = (new function () {
     let inc = 1;
     const array = {};
     this.init = (callback) => {
-        util.ajax({method: "GET"}, data=> {
+        util.ajax({method: "GET"}, data => {
             data.map(std => {
                 array[std.Id] = std;
                 inc = std.Id;
             });
-            if(typeof callback == 'function') callback();
+            if (typeof callback == 'function') callback();
         });
     }
 
     this.create = obj => {
         obj.Id = inc++;
         array[obj.Id] = obj;
-        util.ajax( {method: "POST",body: JSON.stringify(obj)});
+        util.ajax({method: "POST", body: JSON.stringify(obj)});
         return obj;
     }
 
@@ -43,7 +43,7 @@ const util = new function () {
             url = params.path;
             delete params.path;
         }
-        fetch("/student"+url, params).then(data => data.json()).then(callback);
+        fetch("/student" + url, params).then(data => data.json()).then(callback);
     }
 
     this.parse = (tpl, obj) => {
@@ -92,7 +92,7 @@ const student = new function () {
     }
 
     const init = () => {
-        data.init( () => {
+        data.init(() => {
             this.render();
         });
 
