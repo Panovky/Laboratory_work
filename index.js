@@ -61,6 +61,6 @@ const handler = function (req, res) {
     staticFileDir.serve(req, res);
 }
 
-http.createServer(handler).listen(8092, () => {
+http.createServer(handler).listen(8094, () => {
     console.log("run");
 })

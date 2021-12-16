@@ -7,6 +7,7 @@ const data = (new function () {
                 array[std.Id] = std;
                 inc = std.Id;
             });
+            inc++;
             if (typeof callback == 'function') callback();
         });
     }
@@ -39,7 +40,7 @@ const data = (new function () {
 const util = new function () {
     this.ajax = (params, callback) => {
         let url = "";
-        if (params.path != undefined) {
+        if (params.path !== undefined) {
             url = params.path;
             delete params.path;
         }
@@ -73,7 +74,7 @@ const student = new function () {
         };
 
 
-        if (util.id("Id").value == "0") {
+        if (util.id("Id").value === "0") {
             data.create(st)
         } else {
             st.Id = util.id("Id").value;

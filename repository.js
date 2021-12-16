@@ -5,6 +5,7 @@ module.exports = new function () {
     let inc = 1;
     let data = {};
     this.create = dt => {
+
         dt.Id = inc++;
         data[dt.Id] = dt;
         writeFile(fileName, JSON.stringify(data), err => {if (err) console.error(err);});
